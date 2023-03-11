@@ -5,6 +5,7 @@ import {
   TypeaheadOption,
   useBasicTypeaheadTriggerMatch,
 } from "@lexical/react/LexicalTypeaheadMenuPlugin";
+import clsx from "clsx";
 import { TextNode } from "lexical";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import * as ReactDOM from "react-dom";
@@ -26,7 +27,7 @@ const CapitalizedNameMentionsRegex = new RegExp(
 
 const PUNC = DocumentMentionsRegex.PUNCTUATION;
 
-const TRIGGERS = ["@"].join("");
+const TRIGGERS = ["{"].join("");
 
 // Chars we expect to see in a mention (non-space, non-punctuation).
 const VALID_CHARS = "[^" + TRIGGERS + PUNC + "\\s]";
@@ -283,7 +284,10 @@ function MentionsTypeaheadMenuItem({
     <li
       key={option.key}
       tabIndex={-1}
-      className={className}
+      className={clsx(
+        "py-1 px-2 text-sm",
+        isSelected ? "bg-blue-600 text-white" : "text-gray-900"
+      )}
       ref={option.setRefElement}
       role="option"
       aria-selected={isSelected}
@@ -291,8 +295,7 @@ function MentionsTypeaheadMenuItem({
       onMouseEnter={onMouseEnter}
       onClick={onClick}
     >
-      {option.picture}
-      <span className="text">{option.name}</span>
+      {option.name}
     </li>
   );
 }
@@ -355,8 +358,8 @@ export const MentionsPlugin = (): JSX.Element | null => {
       ) =>
         anchorElementRef.current && results.length
           ? ReactDOM.createPortal(
-              <div className="typeahead-popover mentions-menu">
-                <ul>
+              <div className="mt-5 w-max overflow-hidden rounded-md bg-white shadow-sm ring-1 ring-inset ring-gray-300">
+                <ul className="w-max">
                   {options.map((option, i: number) => (
                     <MentionsTypeaheadMenuItem
                       index={i}
