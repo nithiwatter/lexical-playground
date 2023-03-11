@@ -5,6 +5,7 @@ export const ExportPlugin = () => {
 
   return (
     <button
+      className="rounded-md border border-gray-300 bg-white py-1.5 px-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-50"
       onClick={() => {
         const editorState = editor.getEditorState();
         const json = editorState.toJSON();
