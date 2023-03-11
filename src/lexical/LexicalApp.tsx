@@ -5,7 +5,9 @@ import {
 } from "@lexical/react/LexicalComposer";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
+import { MentionNode } from "./nodes/MentionNode";
 import { ExportPlugin } from "./plugins/ExportPlugin";
+import { MentionsPlugin } from "./plugins/MentionsPlugin";
 // import { TreeViewPlugin } from "./plugins/TreeViewPlugin";
 import theme from "./theme";
 
@@ -68,6 +70,7 @@ const initialConfig: InitialConfigType = {
       console.error(e);
     }
   },
+  nodes: [MentionNode],
   onError: () => {},
 };
 
@@ -89,6 +92,7 @@ export const LexicalApp = () => {
         <div className="justify-self-end">
           <ExportPlugin />
         </div>
+        <MentionsPlugin />
         {/* <TreeViewPlugin /> */}
       </div>
     </LexicalComposer>
