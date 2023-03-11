@@ -14,7 +14,6 @@ const Placeholder = () => {
 export const LexicalApp = () => {
   return (
     <LexicalComposer initialConfig={initialConfig}>
-      <div>Below is a lexical text</div>
       <RichTextPlugin
         contentEditable={<ContentEditable className="editor-input" />}
         placeholder={<Placeholder />}
